@@ -180,6 +180,10 @@ If your blog isn't file-heavy, and you don't frequently link files that often, y
 
 Since Github Pages only allows a select few plugins, no, but if you set-up [`jekyll-deploy-action`](https://github.com/jeffreytse/jekyll-deploy-action), you're able to run any custom plugins (even this one) in your project.
 
+## Changelog
+
+Here's the [Changelog.](CHANGELOG.md)
+
 ## License
 
 This plugin is licensed under the MIT license
