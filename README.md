@@ -27,6 +27,32 @@ python-tips-and-tricks
 
 Make sure that you name it *exactly* like that.
 
+So when you link a file:
+
+```
+{% file_link image.png %}
+```
+
+First, the plugin checks if there's a similar folder structure of the post, in the assets folder, in other words, if the post is in this path:
+
+```
+_posts/
+  --/jekyll
+    --/my-cool-post.md
+```
+
+`jekyll-file-link` will check if exists a folder in this path:
+
+```
+assets/
+  --/jekyll
+    --/my-cool-post <-- This is the post folder!
+      --/image.png
+```
+
+If it exists, it returns the folder's path with the file name.
+
+But if it doesn't find the folder, the plugin will do an automatic search looking in the assets directory for that folder, if it finds, it returns its path with the file name.
 
 ## How do I use it?
 
@@ -94,6 +120,16 @@ assets/
 
 `jekyll-file-link` will still detect your asset and successfully link your file.
 
+But if you prefer, you also can specify on the front matter its path:
+
+```
+---
+assets: cool_folder
+---
+```
+
+The plugin will not do a automatic search and just return `assets/cool_folder/your_image.png`
+
 ### Linking a file
 
 Because of the preparation we have done, linking a file is now trivially easy, just write it like this:
@@ -116,9 +152,23 @@ If you do need to link an file that is outside of the post folder, you'll need t
 
 ## Installation
 
-Create a folder called `_plugins` in your project, now, because this plugin is not packaged as a gem, you'll have to either copy the contents of `file_link.rb` and paste it in a file called `file_link.rb` (or any other name you like), or `git clone`/download the repo, and drag and drop `file_link.rb` to the `_plugins` folder.
+(This plugin is still in a very early stage, later changes may *break completely* the functionality, please be certain that you want to use this plugin.)
 
-That's it, that's all you need to install the plugin!
+Add `jekyll-file-link` in your `Gemfile`:
+
+```
+gem "jekyll-file-link"
+```
+
+And add `jekyll-file-link` in the `plugins` sections in your `_config.yml`:
+
+```
+plugins:
+  - jekyll-file-link
+  - jekyll-feed
+```
+
+Run `bundle` or install the gem with `gem install jekyll-file-link`
 
 ## What about [`jekyll-postfiles`?](https://github.com/nhoizey/jekyll-postfiles)
 

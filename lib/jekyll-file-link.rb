@@ -3,8 +3,8 @@ module Jekyll
     def initialize(tag_name, file_name, tokens)
       super
       @file_name = file_name.strip() || ""
-      @get_folders_regex = /\/[^\/\s\.]*(?=\/)/  # get everything before the file name
-      @get_file_name = /([^\/.\s]*)\.[^.\s]*$/ # get the file name excluding the extension
+      @get_folders_regex = %r{/[^/\s.]*(?=/)}  # get everything before the file name
+      @get_file_name = %r{([^/.\s]*)\.[^.\s]*$} # get the file name excluding the extension
       @get_post_name = /[0-9]{4}-[0-9]{2}-[0-9]{2}-(.*)/ # gets only the post name, ignoring date
     end
 
@@ -80,7 +80,7 @@ module Jekyll
       # If the post states where the assets_folder is, return it regardless if it exists or not
       if page["assets_folder"] or page["assets"]
         path = make_url([baseurl, assets_folder, post_folder, @file_name])
-        file_path = "/" + path.join("/")
+        return "/" + path.join("/")
       else
         post_folder = get_post_folder(baseurl, assets_folder, post_folder)
         return "/" + make_url([post_folder, @file_name]).join("/")
